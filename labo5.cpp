@@ -75,7 +75,7 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
 
       while (compteur <= joursDansMois(mois, annee)) {
 
-         cout << setw(3) << setfill(' ') << compteur;
+         cout << ((index == 1) ? setw(2) : setw(3)) << setfill(' ') << compteur;
          index++;
          compteur++;
          if (index == 8) {//début semaine
