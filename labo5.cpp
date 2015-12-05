@@ -68,12 +68,12 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
       /*for (index = 1; index < jourSemaineDebut(mois, annee); index++) {
          cout << setw(3) << setfill(' ') << 'd';
       }*/
-      while (index < jourSemaineDebut(mois, annee)) {
+      while (index <= jourSemaineDebut(mois, annee)) {
          cout << setw(3) << setfill(' ') << ' ';
          index++;
       }
 
-      while (compteur <= joursDansMois(mois, annee)) {
+      while (compteur < joursDansMois(mois, annee)) {
 
          cout << setw(3) << setfill(' ') << compteur;
          index++;
