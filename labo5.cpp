@@ -22,14 +22,21 @@
 using namespace std;
 
 enum class Mois {
-   JANVIER = 1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, OCTOBRE, NOVEMBRE, DECEMBRE
+   JANVIER = 1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, 
+   OCTOBRE, NOVEMBRE, DECEMBRE
 };
+
 void saisieUtilisateur(int&, int&, int&, int&);
 int jourSemaineDebut(int mois, int annee);
 void afficheCalendrier(int mois1, int mois2, int annee1, int annee2);
 string intEnString(int mois);
 bool estBissextile(int annee);
 int joursDansMois(int mois, int annee);
+
+const int LARGEUR_PREMIERE_COLONNE = 2,
+          LARGEUR_COLONNE = 3,
+          BORNE_ANNEE_MINIMALE = 1900,
+          BORNE_ANNEE_MAXIMALE = 2100;
 
 int main() {
    int mois1, mois2, annee1, annee2;
@@ -57,25 +64,23 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
       int compteur = 1;
 
       cout << intEnString(mois) + " " << annee << endl << endl;
-      cout << setw(3) << setfill(' ') << 'L'
-              << setw(3) << setfill(' ') << 'M'
-              << setw(3) << setfill(' ') << 'M'
-              << setw(3) << setfill(' ') << 'J'
-              << setw(3) << setfill(' ') << 'V'
-              << setw(3) << setfill(' ') << 'S'
-              << setw(3) << setfill(' ') << 'D' << endl;
+      cout << setw(LARGEUR_COLONNE) << setfill(' ') << 'L'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'J'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'V'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'S'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'D' << endl;
 
-      /*for (index = 1; index < jourSemaineDebut(mois, annee); index++) {
-         cout << setw(3) << setfill(' ') << 'd';
-      }*/
       while (index < jourSemaineDebut(mois, annee)) {
-         cout << setw(3) << setfill(' ') << ' ';
+         cout << setw(LARGEUR_COLONNE) << setfill(' ') << ' ';
          index++;
       }
 
       while (compteur <= joursDansMois(mois, annee)) {
 
-         cout << ((index == 1) ? setw(2) : setw(3)) << setfill(' ') << compteur;
+         cout << ((index == 1) ? setw(LARGEUR_PREMIERE_COLONNE) : 
+                  setw(LARGEUR_COLONNE)) << setfill(' ') << compteur;
          index++;
          compteur++;
          if (index == 8) {//début semaine
@@ -85,7 +90,7 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
       }
       mois++;
       if (mois == 13) {//début mois
-         mois = 1;
+         mois = (int)Mois::JANVIER;
          annee++;
       }
       cout << endl << endl;
@@ -127,7 +132,7 @@ void saisieUtilisateur(int& mois1, int& mois2, int& annee1, int& annee2) {
    do {
       cout << "Entrez la date de debut: ";
       if (!(saisieOk = static_cast<bool>(cin >> mois1 >> annee1)) || mois1 > 12 
-         || mois1 < 1 || annee1 < 1900 || annee1 > 2100) {
+         || mois1 < 1 || annee1 < BORNE_ANNEE_MINIMALE || annee1 > BORNE_ANNEE_MAXIMALE) {
          cin.clear();
          cout << "Date non valide. Veuillez SVP recommencer." << endl;
          saisieOk = false;
@@ -141,7 +146,8 @@ void saisieUtilisateur(int& mois1, int& mois2, int& annee1, int& annee2) {
       cout << "Entrez la date de fin : ";
       if (!(saisieOk = static_cast<bool>(cin >> mois2 >> annee2)) || !((annee1 
          < annee2) || ((annee1 == annee2) && (mois1 < mois2)))
-         || mois2 > 12 || mois2 < 1 || annee2 < 1900 || annee2 > 2100) {
+         || mois2 > 12 || mois2 < 1 || annee2 < BORNE_ANNEE_MINIMALE || 
+         annee2 > BORNE_ANNEE_MAXIMALE) {
          cin.clear();
          cout << "Date non valide. Veuillez SVP recommencer." << endl;
          saisieOk = false;
@@ -155,9 +161,11 @@ int jourSemaineDebut(int mois, int annee) {
    int premierJour;
 
    if (mois >= 3) {
-      premierJour = (int) (floor((23 * mois) / 9) + 1 + 4 + annee + floor(annee / 4) - floor(annee / 100) + floor(annee / 400) - 2) % 7;
+      premierJour = (int) (floor((23 * mois) / 9) + 1 + 4 + annee + 
+      floor(annee / 4) - floor(annee / 100) + floor(annee / 400) - 2) % 7;
    } else {
-      premierJour = (int) (floor((23 * mois) / 9) + 1 + 4 + annee + floor((annee - 1) / 4) - floor((annee - 1) / 100) + floor((annee - 1) / 400)) % 7;
+      premierJour = (int) (floor((23 * mois) / 9) + 1 + 4 + annee + 
+      floor((annee - 1) / 4) - floor((annee - 1) / 100) + floor((annee - 1) / 400)) % 7;
    }
 
    if (premierJour == 0) {
