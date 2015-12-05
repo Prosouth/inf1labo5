@@ -144,8 +144,9 @@ void saisieUtilisateur(int& mois1, int& mois2, int& annee1, int& annee2) {
 
    do {
       cout << DATE_DEBUT;
-      if (!(saisieOk = static_cast<bool>(cin >> mois1 >> annee1)) || mois1 > 12 
-         || mois1 < 1 || annee1 < BORNE_ANNEE_MINIMALE || annee1 > BORNE_ANNEE_MAXIMALE) {
+      if (!(saisieOk = static_cast<bool>(cin >> mois1 >> annee1)) || mois1 > 
+         (int)Mois::DECEMBRE || mois1 < (int)Mois::JANVIER || annee1 < 
+         BORNE_ANNEE_MINIMALE || annee1 > BORNE_ANNEE_MAXIMALE) {
          cin.clear();
          cout << SAISIE_INCORRECTE << endl;
          saisieOk = false;
@@ -159,8 +160,8 @@ void saisieUtilisateur(int& mois1, int& mois2, int& annee1, int& annee2) {
       cout << DATE_FIN;
       if (!(saisieOk = static_cast<bool>(cin >> mois2 >> annee2)) || !((annee1 
          < annee2) || ((annee1 == annee2) && (mois1 < mois2)))
-         || mois2 > 12 || mois2 < 1 || annee2 < BORNE_ANNEE_MINIMALE || 
-         annee2 > BORNE_ANNEE_MAXIMALE) {
+         || mois2 > (int)Mois::DECEMBRE || mois2 < (int)Mois::JANVIER || 
+         annee2 < BORNE_ANNEE_MINIMALE || annee2 > BORNE_ANNEE_MAXIMALE) {
          cin.clear();
          cout << SAISIE_INCORRECTE << endl;
          saisieOk = false;
