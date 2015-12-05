@@ -52,7 +52,7 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
    int mois = mois1;
    int annee = annee1;
 
-   while (mois <= mois2 || annee < annee2) {
+   while ((mois <= mois2 && annee<=annee2) || annee<annee2) {
       int index = 1;
       int compteur = 1;
 
@@ -68,12 +68,12 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
       /*for (index = 1; index < jourSemaineDebut(mois, annee); index++) {
          cout << setw(3) << setfill(' ') << 'd';
       }*/
-      while (index <= jourSemaineDebut(mois, annee)) {
+      while (index < jourSemaineDebut(mois, annee)) {
          cout << setw(3) << setfill(' ') << ' ';
          index++;
       }
 
-      while (compteur < joursDansMois(mois, annee)) {
+      while (compteur <= joursDansMois(mois, annee)) {
 
          cout << setw(3) << setfill(' ') << compteur;
          index++;
