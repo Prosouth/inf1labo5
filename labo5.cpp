@@ -63,11 +63,11 @@ int main()
 
    // affichage accueil utilisateur
    cout << "+-----------------------------------------------------+" << endl
-           << "|                Bonjour et bienvenue                 |" << endl
-           << "+-----------------------------------------------------+" << endl
-           << "| Ce programme permet d'afficher le calendrier entre 2|" << endl
-           << "| dates ayant la forme mois/annee.                    |" << endl
-           << "+-----------------------------------------------------+" << endl;
+        << "|                Bonjour et bienvenue                 |" << endl
+        << "+-----------------------------------------------------+" << endl
+        << "| Ce programme permet d'afficher le calendrier entre 2|" << endl
+        << "| dates ayant la forme mois/annee.                    |" << endl
+        << "+-----------------------------------------------------+" << endl;
 
    saisieUtilisateur(mois1, mois2, annee1, annee2);
    afficheCalendrier(mois1, mois2, annee1, annee2);
