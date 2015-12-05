@@ -47,7 +47,9 @@ int joursDansMois(int mois, int annee);
 const int LARGEUR_PREMIERE_COLONNE = 2,
           LARGEUR_COLONNE = 3,
           BORNE_ANNEE_MINIMALE = 1900,
-          BORNE_ANNEE_MAXIMALE = 2100;
+          BORNE_ANNEE_MAXIMALE = 2100,
+          DIMANCHE = 7,
+          LUNDI = 1;
 const string DATE_DEBUT = "Entrez la date de debut: ",
              DATE_FIN = "Entrez la date de fin: ",
              SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
@@ -73,7 +75,7 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
    int annee = annee1;
 
    while ((mois <= mois2 && annee<=annee2) || annee<annee2) {
-      int index = 1;
+      int index = LUNDI;
       int compteur = 1;
 
       cout << intEnString(mois) + " " << annee << endl << endl;
@@ -92,17 +94,17 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
 
       while (compteur <= joursDansMois(mois, annee)) {
 
-         cout << ((index == 1) ? setw(LARGEUR_PREMIERE_COLONNE) : 
+         cout << ((index == LUNDI) ? setw(LARGEUR_PREMIERE_COLONNE) : 
                   setw(LARGEUR_COLONNE)) << setfill(' ') << compteur;
          index++;
          compteur++;
-         if (index == 8) {//début semaine
+         if (index > DIMANCHE) {//début semaine
             cout << endl;
-            index = 1;
+            index = LUNDI;
          }
       }
       mois++;
-      if (mois == 13) {//début mois
+      if (mois > (int)Mois::DECEMBRE) {//début mois
          mois = (int)Mois::JANVIER;
          annee++;
       }
