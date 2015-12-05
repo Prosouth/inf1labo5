@@ -3,5 +3,5 @@
 *
 
 # But not these files...
-!labo05_saez_zanone.cpp
+!labo5.cpp
 !.gitignore
