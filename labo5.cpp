@@ -3,12 +3,23 @@
  Laboratoire : Labo5
  Fichier     : labo5.cpp
  Auteur(s)   : Saez Sebastien, Jérémie Zanone
- Date        : 02.12.2015
+ Date        : 09.12.2015
 
- But         : 
+ But         : Ce programme affiche l'ensemble des mois du calendrier grégorien
+               correspondant à l'intervalle (date début, date fin) bornes incluses
+               choisie par l'utilisateur lui-même.
+ 
 
- Remarque(s) : 
-
+ Remarque(s) : - Le programme gère les exceptions de la saisie utilisateur.
+               - La saisie est de la forme: moisDebut anneeDebut moisFin anneeFin
+                 situer entre BORNE_ANNEE_MINIMALE, BORNE_ANNEE_MAXIMAL.
+               - Les valeurs du programme peuvent facilement être modifié 
+                 (constantes prévues à cet effet).
+               - Le programme est structuré en fonctions
+               - Le programme tient compte des années bissextiles.
+               - A la fin de la première exécution l'utilisateur a la possibilité,
+                 d'afficher un nouveau calendrier ou de quitter l'application.
+   
  Compilateur : g++ 5.2.0
  -----------------------------------------------------------------------------------
  */
@@ -37,7 +48,9 @@ const int LARGEUR_PREMIERE_COLONNE = 2,
           LARGEUR_COLONNE = 3,
           BORNE_ANNEE_MINIMALE = 1900,
           BORNE_ANNEE_MAXIMALE = 2100;
-
+const string DATE_DEBUT = "Entrez la date de debut: ",
+             DATE_FIN = "Entrez la date de fin: ",
+             SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
 int main() {
    int mois1, mois2, annee1, annee2;
 
@@ -130,11 +143,11 @@ void saisieUtilisateur(int& mois1, int& mois2, int& annee1, int& annee2) {
    bool saisieOk = true;
 
    do {
-      cout << "Entrez la date de debut: ";
+      cout << DATE_DEBUT;
       if (!(saisieOk = static_cast<bool>(cin >> mois1 >> annee1)) || mois1 > 12 
          || mois1 < 1 || annee1 < BORNE_ANNEE_MINIMALE || annee1 > BORNE_ANNEE_MAXIMALE) {
          cin.clear();
-         cout << "Date non valide. Veuillez SVP recommencer." << endl;
+         cout << SAISIE_INCORRECTE << endl;
          saisieOk = false;
          cout << endl;
       }
@@ -143,13 +156,13 @@ void saisieUtilisateur(int& mois1, int& mois2, int& annee1, int& annee2) {
 
    cout << endl;
    do {
-      cout << "Entrez la date de fin : ";
+      cout << DATE_FIN;
       if (!(saisieOk = static_cast<bool>(cin >> mois2 >> annee2)) || !((annee1 
          < annee2) || ((annee1 == annee2) && (mois1 < mois2)))
          || mois2 > 12 || mois2 < 1 || annee2 < BORNE_ANNEE_MINIMALE || 
          annee2 > BORNE_ANNEE_MAXIMALE) {
          cin.clear();
-         cout << "Date non valide. Veuillez SVP recommencer." << endl;
+         cout << SAISIE_INCORRECTE << endl;
          saisieOk = false;
          cout << endl;
       }
@@ -160,7 +173,7 @@ void saisieUtilisateur(int& mois1, int& mois2, int& annee1, int& annee2) {
 int jourSemaineDebut(int mois, int annee) {
    int premierJour;
 
-   if (mois >= 3) {
+   if (mois >= (int)Mois::MARS) {
       premierJour = (int) (floor((23 * mois) / 9) + 1 + 4 + annee + 
       floor(annee / 4) - floor(annee / 100) + floor(annee / 400) - 2) % 7;
    } else {
@@ -181,7 +194,7 @@ bool estBissextile(int annee) {
 int joursDansMois(int mois, int annee) {
    int joursDansMois;
 
-   if (estBissextile(annee) && mois == 2) {
+   if (estBissextile(annee) && mois == (int)Mois::FEVRIER) {
       joursDansMois = 29;
    } else {
       switch ((Mois) mois) {
