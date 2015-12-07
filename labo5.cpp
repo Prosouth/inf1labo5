@@ -67,7 +67,11 @@ int main() {
            << "+-----------------------------------------------------+" << endl
            << endl; 
    /*saisieUtilisateur(mois1, mois2, annee1, annee2);*/
-   void checkSaisieDate();
+   
+   
+   //void checkSaisieDate(); CONNARD DE MERDE
+   checkSaisieDate(mois1, mois2, annee1, annee2);
+   
    afficheCalendrier(mois1, mois2, annee1, annee2);
 
    
