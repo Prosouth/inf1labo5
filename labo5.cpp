@@ -179,7 +179,7 @@ void checkSaisieDate(int& mois1, int& mois2, int& annee1, int& annee2)
    {
       saisieDate(DATE_FIN, mois2, annee2);
    }
-   while(((annee1 < annee2) || ((annee1 == annee2) && (mois1 <= mois2)))
+   while(!((annee1 < annee2) || ((annee1 == annee2) && (mois1 <= mois2)))
          && mois2 <= (int) Mois::DECEMBRE && mois2 >= (int) Mois::JANVIER
          && annee2 >= BORNE_ANNEE_MINIMALE && annee2 <= BORNE_ANNEE_MAXIMALE);
  
