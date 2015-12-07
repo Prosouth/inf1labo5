@@ -41,7 +41,7 @@ string intEnString(int mois);
 bool estBissextile(int annee);
 int joursDansMois(int mois, int annee);
 void saisieDate(const string& messageEntree, int& moisTemp, int& anneeTemp);
-void checkSaisieDate();
+void checkSaisieDate(int& mois1, int& mois2, int& annee1, int& annee2);
 
 const int LARGEUR_PREMIERE_COLONNE = 2,
         LARGEUR_COLONNE = 3,
@@ -168,9 +168,8 @@ void saisieDate(const string& messageEntree, int& moisTemp, int& anneeTemp)
    while(!saisieOk);
      
 }
-void checkSaisieDate()
+void checkSaisieDate(int& mois1, int& mois2, int& annee1, int& annee2)
 {
-   int mois1, annee1, mois2, annee2;
    saisieDate(DATE_DEBUT, mois1, annee1);
    do
    {
