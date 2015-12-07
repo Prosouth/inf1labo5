@@ -40,7 +40,7 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2);
 string intEnString(int mois);
 bool estBissextile(int annee);
 int joursDansMois(int mois, int annee);
-void saisieDate(string messageEntree, int& mois, int& annee);
+void saisieDate(const string& messageEntree, int& moisTemp, int& anneeTemp);
 void checkSaisieDate();
 
 const int LARGEUR_PREMIERE_COLONNE = 2,
@@ -66,10 +66,11 @@ int main() {
            << "| dates ayant la forme mois annee.                    |" << endl
            << "+-----------------------------------------------------+" << endl
            << endl; 
-   saisieUtilisateur(mois1, mois2, annee1, annee2);
+   /*saisieUtilisateur(mois1, mois2, annee1, annee2);*/
+   void checkSaisieDate();
    afficheCalendrier(mois1, mois2, annee1, annee2);
 
-   system("PAUSE");
+   
    return EXIT_SUCCESS;
 }
 
@@ -149,7 +150,7 @@ string intEnString(int mois) {
 
 
 
-void saisieDate(string messageEntree, int moisTemp, int anneeTemp)
+void saisieDate(const string& messageEntree, int& moisTemp, int& anneeTemp)
 {
    bool saisieOk = true;
    do
