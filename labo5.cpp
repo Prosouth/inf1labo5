@@ -76,7 +76,6 @@ int main()
    {
    saisieEtCheckDate(moisDebut, moisFin, anneeDebut, anneeFin);
    afficheCalendrier(moisDebut, moisFin, anneeDebut, anneeFin);
-   cout << "Voulez-vous quitter le programme ? [o/n] : ";
    saisieContinuerProgramme(saisieUtilisateur);
    }
    while(saisieUtilisateur != 'o');
@@ -289,6 +288,7 @@ int nbreDeJoursDansMois(int mois, int annee)
 
 char saisieContinuerProgramme(char& saisieUtilisateur)
 {
+   cout << "Voulez-vous quitter le programme ? [o/n] : ";
    cin >> saisieUtilisateur;
    if (cin.fail())
    {
