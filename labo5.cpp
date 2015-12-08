@@ -65,52 +65,50 @@ int main() {
            << "+-----------------------------------------------------+" << endl
            << endl; 
    
-  
    saisieEtCheckDate(moisDebut, moisFin, anneeDebut, anneeFin);
-   
    afficheCalendrier(moisDebut, moisFin, anneeDebut, anneeFin);
 
-   
    return EXIT_SUCCESS;
 }
 
-void afficheCalendrier(int moisDebut, int moisFin, int anneeDebut, int anneeFin) {
-   int mois = moisDebut;
-   int annee = anneeDebut;
-
-   while ((mois <= moisFin && annee == anneeFin) || annee < anneeFin) {
+void afficheCalendrier(int moisDebut, int mois2, int annee1, int annee2) {
+   int moisAffiche = moisDebut;
+   int annee = annee1;
+   
+   while ((moisAffiche <= mois2 && annee == annee2) || annee < annee2) {
       int index = LUNDI;
-      int compteur = 1;
-
-      cout << conversionNombreEnMois(mois) + " " << annee << endl << endl;
+      int premierJourDuMois = premierJourSemaineDuMois(moisAffiche, annee);
+      int nbreJoursDansMois = nbreDeJoursDansMois(moisAffiche, annee);
+     
+     
+      cout << conversionNombreEnMois(moisAffiche) + " " << annee << endl << endl;
       cout << setw(LARGEUR_PREMIERE_COLONNE) << setfill(' ') << 'L'
-           << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
-           << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
-           << setw(LARGEUR_COLONNE) << setfill(' ') << 'J'
-           << setw(LARGEUR_COLONNE) << setfill(' ') << 'V'
-           << setw(LARGEUR_COLONNE) << setfill(' ') << 'S'
-           << setw(LARGEUR_COLONNE) << setfill(' ') << 'D' << endl;
-
-      while (index < premierJourSemaineDuMois(mois, annee)) {
+              << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
+              << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
+              << setw(LARGEUR_COLONNE) << setfill(' ') << 'J'
+              << setw(LARGEUR_COLONNE) << setfill(' ') << 'V'
+              << setw(LARGEUR_COLONNE) << setfill(' ') << 'S'
+              << setw(LARGEUR_COLONNE) << setfill(' ') << 'D' << endl;
+ 
+      while (index < premierJourDuMois) {
          cout << ((index == LUNDI) ? setw(LARGEUR_PREMIERE_COLONNE) :
                  setw(LARGEUR_COLONNE)) << setfill(' ') << ' ';
          index++;
       }
-
-      while (compteur <= nbreDeJoursDansMois(mois, annee)) {
-
+ 
+      for (int compteur = 1; compteur <= nbreJoursDansMois; compteur++) {
          cout << ((index == LUNDI) ? setw(LARGEUR_PREMIERE_COLONNE) :
                  setw(LARGEUR_COLONNE)) << setfill(' ') << compteur;
          index++;
-         compteur++;
-         if (index > DIMANCHE) {//début semaine           
+ 
+         if (index > DIMANCHE) {//début semaine          
             index = LUNDI;
             cout << endl;
          }
       }
-      mois++;
-      if (mois > (int) Mois::DECEMBRE) {//début mois
-         mois = (int) Mois::JANVIER;
+      moisAffiche++;
+      if (moisAffiche > (int) Mois::DECEMBRE) {//début mois
+         moisAffiche = (int) Mois::JANVIER;
          annee++;
       }
       cout << endl << endl;
@@ -186,10 +184,12 @@ int premierJourSemaineDuMois(int mois, int annee) {
 
    if (mois >= (int) Mois::MARS) {
       premierJour = (int) (floor((23 * mois) / 9) + 1 + 4 + annee +
-              floor(annee / 4) - floor(annee / 100) + floor(annee / 400) - 2) % 7;
+                    floor(annee / 4) - floor(annee / 100) + floor(annee / 400) 
+                    - 2) % 7;
    } else {
       premierJour = (int) (floor((23 * mois) / 9) + 1 + 4 + annee +
-              floor((annee - 1) / 4) - floor((annee - 1) / 100) + floor((annee - 1) / 400)) % 7;
+                    floor((annee - 1) / 4) - floor((annee - 1) / 100) 
+                    + floor((annee - 1) / 400)) % 7;
    }
 
    if (premierJour == 0) {
