@@ -34,14 +34,13 @@ enum class Mois {
    OCTOBRE, NOVEMBRE, DECEMBRE
 };
 
-void saisieUtilisateur(int&, int&, int&, int&);
-int jourSemaineDebut(int mois, int annee);
-void afficheCalendrier(int mois1, int mois2, int annee1, int annee2);
-string intEnString(int mois);
+int premierJourSemaineDuMois(int mois, int annee);
+void afficheCalendrier(int moisDebut, int moisFin, int anneeDebut, int anneeFin);
+string conversionNombreEnMois(int mois);
 bool estBissextile(int annee);
-int joursDansMois(int mois, int annee);
-void saisieDate(const string& messageEntree, int& moisTemp, int& anneeTemp);
-void checkSaisieDate(int& mois1, int& mois2, int& annee1, int& annee2);
+int nbreDeJoursDansMois(int mois, int annee);
+void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie);
+void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin);
 
 const int LARGEUR_PREMIERE_COLONNE = 2,
         LARGEUR_COLONNE = 3,
@@ -55,9 +54,8 @@ const string DATE_DEBUT = "Entrez la date de debut: ",
         SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
 
 int main() {
-   int mois1, mois2, annee1, annee2;
-   //int mois1 = 10, mois2 = 1, annee1 = 2014, annee2 = 2015;
-
+   int moisDebut, moisFin, anneeDebut, anneeFin;
+   
    // affichage accueil utilisateur
    cout << "+-----------------------------------------------------+" << endl
            << "|                Bonjour et bienvenue                 |" << endl
@@ -66,27 +64,25 @@ int main() {
            << "| dates ayant la forme mois annee.                    |" << endl
            << "+-----------------------------------------------------+" << endl
            << endl; 
-   /*saisieUtilisateur(mois1, mois2, annee1, annee2);*/
    
+  
+   saisieEtCheckDate(moisDebut, moisFin, anneeDebut, anneeFin);
    
-   //void checkSaisieDate(); CONNARD DE MERDE
-   checkSaisieDate(mois1, mois2, annee1, annee2);
-   
-   afficheCalendrier(mois1, mois2, annee1, annee2);
+   afficheCalendrier(moisDebut, moisFin, anneeDebut, anneeFin);
 
    
    return EXIT_SUCCESS;
 }
 
-void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
-   int mois = mois1;
-   int annee = annee1;
+void afficheCalendrier(int moisDebut, int moisFin, int anneeDebut, int anneeFin) {
+   int mois = moisDebut;
+   int annee = anneeDebut;
 
-   while ((mois <= mois2 && annee == annee2) || annee < annee2) {
+   while ((mois <= moisFin && annee == anneeFin) || annee < anneeFin) {
       int index = LUNDI;
       int compteur = 1;
 
-      cout << intEnString(mois) + " " << annee << endl << endl;
+      cout << conversionNombreEnMois(mois) + " " << annee << endl << endl;
       cout << setw(LARGEUR_PREMIERE_COLONNE) << setfill(' ') << 'L'
            << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
            << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
@@ -95,13 +91,13 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
            << setw(LARGEUR_COLONNE) << setfill(' ') << 'S'
            << setw(LARGEUR_COLONNE) << setfill(' ') << 'D' << endl;
 
-      while (index < jourSemaineDebut(mois, annee)) {
+      while (index < premierJourSemaineDuMois(mois, annee)) {
          cout << ((index == LUNDI) ? setw(LARGEUR_PREMIERE_COLONNE) :
                  setw(LARGEUR_COLONNE)) << setfill(' ') << ' ';
          index++;
       }
 
-      while (compteur <= joursDansMois(mois, annee)) {
+      while (compteur <= nbreDeJoursDansMois(mois, annee)) {
 
          cout << ((index == LUNDI) ? setw(LARGEUR_PREMIERE_COLONNE) :
                  setw(LARGEUR_COLONNE)) << setfill(' ') << compteur;
@@ -121,7 +117,7 @@ void afficheCalendrier(int mois1, int mois2, int annee1, int annee2) {
    }
 }
 
-string intEnString(int mois) {
+string conversionNombreEnMois(int mois) {
    string moisConverti;
    switch ((Mois) mois) {
       case Mois::JANVIER: moisConverti = "Janvier";
@@ -152,17 +148,15 @@ string intEnString(int mois) {
    return moisConverti;
 }
 
-
-
-void saisieDate(const string& messageEntree, int& moisTemp, int& anneeTemp)
+void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie)
 {
    bool saisieOk = true;
    do
    {
       cout << messageEntree;
-      if(!(saisieOk = static_cast<bool> (cin >> moisTemp >> anneeTemp)
-         && moisTemp <= (int)Mois::DECEMBRE && moisTemp >= (int)Mois::JANVIER 
-         && anneeTemp >= BORNE_ANNEE_MINIMALE && moisTemp <= BORNE_ANNEE_MAXIMALE))
+      if(!(saisieOk = static_cast<bool> (cin >> moisSaisi >> anneeSaisie)
+         && moisSaisi <= (int)Mois::DECEMBRE && moisSaisi >= (int)Mois::JANVIER 
+         && anneeSaisie >= BORNE_ANNEE_MINIMALE && moisSaisi <= BORNE_ANNEE_MAXIMALE))
       {
          cin.clear();
          cout << SAISIE_INCORRECTE << endl << endl;
@@ -170,55 +164,24 @@ void saisieDate(const string& messageEntree, int& moisTemp, int& anneeTemp)
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
    }
    while(!saisieOk);
+   
+   cout << endl;
      
 }
-void checkSaisieDate(int& mois1, int& mois2, int& annee1, int& annee2)
+void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin)
 {
-   saisieDate(DATE_DEBUT, mois1, annee1);
+   saisieDate(DATE_DEBUT, moisDebut, anneeDebut);
    do
    {
-      saisieDate(DATE_FIN, mois2, annee2);
+      saisieDate(DATE_FIN, moisFin, anneeFin);
    }
-   while(!((annee1 < annee2) || ((annee1 == annee2) && (mois1 <= mois2)))
-         && mois2 <= (int) Mois::DECEMBRE && mois2 >= (int) Mois::JANVIER
-         && annee2 >= BORNE_ANNEE_MINIMALE && annee2 <= BORNE_ANNEE_MAXIMALE);
+   while(!((anneeDebut < anneeFin) || ((anneeDebut == anneeFin) && (moisDebut <= moisFin)))
+         && moisFin <= (int) Mois::DECEMBRE && moisFin >= (int) Mois::JANVIER
+         && anneeFin >= BORNE_ANNEE_MINIMALE && anneeFin <= BORNE_ANNEE_MAXIMALE);
  
 }
 
-
-
-void saisieUtilisateur(int& mois1, int& mois2, int& annee1, int& annee2) {
-   bool saisieOk = true;
-
-   do {
-      cout << DATE_DEBUT;
-      if (!(saisieOk = static_cast<bool> (cin >> mois1 >> annee1)
-              && mois1 <= (int) Mois::DECEMBRE && mois1 >= (int) Mois::JANVIER
-              && annee1 >= BORNE_ANNEE_MINIMALE && annee1 <= BORNE_ANNEE_MAXIMALE)) {
-         cin.clear();
-         cout << SAISIE_INCORRECTE << endl << endl;
-      }
-      cin.ignore(numeric_limits<streamsize>::max(), '\n');
-   } while (!saisieOk);
-   
-   cout << endl;
-   
-   do {
-      cout << DATE_FIN;
-      if (!(saisieOk = static_cast<bool> (cin >> mois2 >> annee2)
-              && ((annee1 < annee2) || ((annee1 == annee2) && (mois1 <= mois2)))
-              && mois2 <= (int) Mois::DECEMBRE && mois2 >= (int) Mois::JANVIER
-              && annee2 >= BORNE_ANNEE_MINIMALE && annee2 <= BORNE_ANNEE_MAXIMALE)) {
-         cin.clear();
-         cout << SAISIE_INCORRECTE << endl << endl;
-      }
-      cin.ignore(numeric_limits<streamsize>::max(), '\n');   
-   } while (!saisieOk);
-   
-   cout << endl;
-}
-
-int jourSemaineDebut(int mois, int annee) {
+int premierJourSemaineDuMois(int mois, int annee) {
    int premierJour;
 
    if (mois >= (int) Mois::MARS) {
@@ -239,26 +202,26 @@ bool estBissextile(int annee) {
    return (annee % 400 == 0) || ((annee % 4 == 0) && ((annee % 100) != 0));
 }
 
-int joursDansMois(int mois, int annee) {
-   int joursDansMois;
+int nbreDeJoursDansMois(int mois, int annee) {
+   int nbreDeJoursDansMois;
 
    if (estBissextile(annee) && mois == (int) Mois::FEVRIER) {
-      joursDansMois = 29;
+      nbreDeJoursDansMois = 29;
    } else {
       switch ((Mois) mois) {
          case Mois::FEVRIER:
-            joursDansMois = 28;
+            nbreDeJoursDansMois = 28;
             break;
          case Mois::AVRIL:
          case Mois::JUIN:
          case Mois::SEPTEMBRE:
          case Mois::NOVEMBRE:
-            joursDansMois = 30;
+            nbreDeJoursDansMois = 30;
             break;
          default:
-            joursDansMois = 31;
+            nbreDeJoursDansMois = 31;
             break;
       }
    }
-   return joursDansMois;
+   return nbreDeJoursDansMois;
 }
