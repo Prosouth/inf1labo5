@@ -36,12 +36,13 @@ enum class Mois
 };
 
 int premierJourSemaineDuMois(int mois, int annee);
-void afficheCalendrier(int moisDebut, int moisFin, int anneeDebut, int anneeFin);
 string conversionNombreEnMois(int mois);
 bool estBissextile(int annee);
+char saisieContinuerProgramme(char& saisieUtilisateur);
 int nbreDeJoursDansMois(int mois, int annee);
 void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie);
 void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin);
+void afficheCalendrier(int moisDebut, int moisFin, int anneeDebut, int anneeFin);
 
 const int LARGEUR_PREMIERE_COLONNE = 2,
           LARGEUR_COLONNE = 3,
@@ -54,11 +55,14 @@ const string DATE_DEBUT = "Entrez la date de debut: ",
              DATE_FIN = "Entrez la date de fin: ",
              SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
 
+const char OUI = 'o',
+           NON = 'n';
+
 
 int main() 
 {
    int moisDebut, moisFin, anneeDebut, anneeFin;
-   char genererUnCalendrier;
+   char saisieUtilisateur;
    
    // Affichage accueil utilisateur
    cout << "+-----------------------------------------------------+" << endl
@@ -73,9 +77,9 @@ int main()
    saisieEtCheckDate(moisDebut, moisFin, anneeDebut, anneeFin);
    afficheCalendrier(moisDebut, moisFin, anneeDebut, anneeFin);
    cout << "Voulez-vous quitter le programme ? [o/n] : ";
-   cin >> genererUnCalendrier;
+   saisieContinuerProgramme(saisieUtilisateur);
    }
-   while(genererUnCalendrier != 'o');
+   while(saisieUtilisateur != 'o');
    
 
    return EXIT_SUCCESS;
@@ -281,4 +285,23 @@ int nbreDeJoursDansMois(int mois, int annee)
    }
    
    return nbreDeJoursDansMois;
+}
+
+char saisieContinuerProgramme(char& saisieUtilisateur)
+{
+   cin >> saisieUtilisateur;
+   if (cin.fail())
+   {
+         cin.clear();
+         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+   }
+   if ((saisieUtilisateur != OUI && saisieUtilisateur != NON)
+          and cin.fail() == false)
+   {
+         cout << "La valeur que vous avez entree n'est pas correcte."
+                 " Veuillez recommencer." << endl << endl;
+   }
+   cout << endl << endl;
+   
+   return saisieUtilisateur;
 }
