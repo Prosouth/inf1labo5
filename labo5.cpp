@@ -52,7 +52,9 @@ const int LARGEUR_PREMIERE_COLONNE = 2,
 const string DATE_DEBUT = "Entrez la date de debut: ",
         DATE_FIN = "Entrez la date de fin: ",
         SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
-
+// **********************************
+// NE PAS OUBLIER DE METTRE LA BOUCLE
+// **********************************
 int main() {
    int moisDebut, moisFin, anneeDebut, anneeFin;
    
@@ -173,9 +175,9 @@ void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& annee
    {
       saisieDate(DATE_FIN, moisFin, anneeFin);
    }
-   while(!((anneeDebut < anneeFin) || ((anneeDebut == anneeFin) && (moisDebut <= moisFin)))
+   while(!((anneeDebut < anneeFin) || ((anneeDebut == anneeFin) && (moisDebut <= moisFin))
          && moisFin <= (int) Mois::DECEMBRE && moisFin >= (int) Mois::JANVIER
-         && anneeFin >= BORNE_ANNEE_MINIMALE && anneeFin <= BORNE_ANNEE_MAXIMALE);
+         && anneeFin >= BORNE_ANNEE_MINIMALE && anneeFin <= BORNE_ANNEE_MAXIMALE));
  
 }
 
