@@ -70,6 +70,8 @@ int main()
         << "+-----------------------------------------------------+" << endl
         << "| Ce programme permet d'afficher le calendrier entre 2|" << endl
         << "| dates ayant la forme mois annee.                    |" << endl
+        << "| Veuillez rentrer les dates sous la forme (mm yyyy)  |" << endl
+
         << "+-----------------------------------------------------+" << endl
         << endl; 
    do
