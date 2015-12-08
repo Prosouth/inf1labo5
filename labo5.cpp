@@ -55,24 +55,28 @@ const string DATE_DEBUT = "Entrez la date de debut: ",
              SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
 
 
-// **********************************
-// NE PAS OUBLIER DE METTRE LA BOUCLE
-// **********************************
 int main() 
 {
    int moisDebut, moisFin, anneeDebut, anneeFin;
+   char genererUnCalendrier;
    
    // Affichage accueil utilisateur
    cout << "+-----------------------------------------------------+" << endl
-           << "|                Bonjour et bienvenue                 |" << endl
-           << "+-----------------------------------------------------+" << endl
-           << "| Ce programme permet d'afficher le calendrier entre 2|" << endl
-           << "| dates ayant la forme mois annee.                    |" << endl
-           << "+-----------------------------------------------------+" << endl
-           << endl; 
-   
+        << "|                Bonjour et bienvenue                 |" << endl
+        << "+-----------------------------------------------------+" << endl
+        << "| Ce programme permet d'afficher le calendrier entre 2|" << endl
+        << "| dates ayant la forme mois annee.                    |" << endl
+        << "+-----------------------------------------------------+" << endl
+        << endl; 
+   do
+   {
    saisieEtCheckDate(moisDebut, moisFin, anneeDebut, anneeFin);
    afficheCalendrier(moisDebut, moisFin, anneeDebut, anneeFin);
+   cout << "Voulez-vous quitter le programme ? [o/n] : ";
+   cin >> genererUnCalendrier;
+   }
+   while(genererUnCalendrier != 'o');
+   
 
    return EXIT_SUCCESS;
 }
@@ -168,6 +172,7 @@ string conversionNombreEnMois(int mois)
       case Mois::DECEMBRE: moisConverti = "Decembre";
          break;
    }
+   
    return moisConverti;
 }
 
@@ -199,9 +204,9 @@ void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& annee
    {
       saisieDate(DATE_FIN, moisFin, anneeFin);
    }
-   while(!((anneeDebut < anneeFin) || ((anneeDebut == anneeFin) && (moisDebut <= moisFin))
+   while(!(anneeDebut < anneeFin) || ((anneeDebut == anneeFin) && (moisDebut <= moisFin))
          && moisFin <= (int) Mois::DECEMBRE && moisFin >= (int) Mois::JANVIER
-         && anneeFin >= BORNE_ANNEE_MINIMALE && anneeFin <= BORNE_ANNEE_MAXIMALE));
+         && anneeFin >= BORNE_ANNEE_MINIMALE && anneeFin <= BORNE_ANNEE_MAXIMALE);
  
 }
 
@@ -227,6 +232,7 @@ int premierJourSemaineDuMois(int mois, int annee)
    {
       premierJour = 7;
    }
+   
    return premierJour;
 }
 
@@ -273,5 +279,6 @@ int nbreDeJoursDansMois(int mois, int annee)
             break;
       }
    }
+   
    return nbreDeJoursDansMois;
 }
