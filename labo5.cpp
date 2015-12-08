@@ -9,8 +9,8 @@
                choisie par l'utilisateur lui-même.
  
  Remarque(s) : - Le programme gère les exceptions de la saisie utilisateur.
-               - La saisie est de la forme: moisDebut(mm) anneeDebut(yyyy) moisFin anneeFin
-                 située entre BORNE_ANNEE_MINIMALE, BORNE_ANNEE_MAXIMAL.
+               - La saisie est de la forme: moisDebut(mm), anneeDebut(yyyy),
+                 moisFin, anneeFin située entre BORNE_ANNEE_MINIMALE, BORNE_ANNEE_MAXIMALE.
                - Les valeurs du programme peuvent facilement être modifiées 
                  (constantes prévues à cet effet).
                - Le programme est structuré en fonctions
@@ -29,7 +29,8 @@
 
 using namespace std;
 
-enum class Mois {
+enum class Mois 
+{
    JANVIER = 1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE,
    OCTOBRE, NOVEMBRE, DECEMBRE
 };
@@ -43,22 +44,25 @@ void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie);
 void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin);
 
 const int LARGEUR_PREMIERE_COLONNE = 2,
-        LARGEUR_COLONNE = 3,
-        BORNE_ANNEE_MINIMALE = 1900,
-        BORNE_ANNEE_MAXIMALE = 2100,
-        DIMANCHE = 7,
-        LUNDI = 1;
+          LARGEUR_COLONNE = 3,
+          BORNE_ANNEE_MINIMALE = 1900,
+          BORNE_ANNEE_MAXIMALE = 2100,
+          DIMANCHE = 7,
+          LUNDI = 1;
 
 const string DATE_DEBUT = "Entrez la date de debut: ",
-        DATE_FIN = "Entrez la date de fin: ",
-        SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
+             DATE_FIN = "Entrez la date de fin: ",
+             SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
+
+
 // **********************************
 // NE PAS OUBLIER DE METTRE LA BOUCLE
 // **********************************
-int main() {
+int main() 
+{
    int moisDebut, moisFin, anneeDebut, anneeFin;
    
-   // affichage accueil utilisateur
+   // Affichage accueil utilisateur
    cout << "+-----------------------------------------------------+" << endl
            << "|                Bonjour et bienvenue                 |" << endl
            << "+-----------------------------------------------------+" << endl
@@ -73,11 +77,19 @@ int main() {
    return EXIT_SUCCESS;
 }
 
-void afficheCalendrier(int moisDebut, int mois2, int annee1, int annee2) {
+
+/*
+Fonction principale pour mettre en oeuvre l'affichage du calendrier
+prenant en paramètre le mois du début le mois de fin, l'année du début, l'année de fin
+tous des entiers. 
+*/
+void afficheCalendrier(int moisDebut, int mois2, int annee1, int annee2) 
+{
    int moisAffiche = moisDebut;
    int annee = annee1;
    
-   while ((moisAffiche <= mois2 && annee == annee2) || annee < annee2) {
+   while ((moisAffiche <= mois2 && annee == annee2) || annee < annee2) 
+   {
       int index = LUNDI;
       int premierJourDuMois = premierJourSemaineDuMois(moisAffiche, annee);
       int nbreJoursDansMois = nbreDeJoursDansMois(moisAffiche, annee);
@@ -85,16 +97,17 @@ void afficheCalendrier(int moisDebut, int mois2, int annee1, int annee2) {
      
       cout << conversionNombreEnMois(moisAffiche) + " " << annee << endl << endl;
       cout << setw(LARGEUR_PREMIERE_COLONNE) << setfill(' ') << 'L'
-              << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
-              << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
-              << setw(LARGEUR_COLONNE) << setfill(' ') << 'J'
-              << setw(LARGEUR_COLONNE) << setfill(' ') << 'V'
-              << setw(LARGEUR_COLONNE) << setfill(' ') << 'S'
-              << setw(LARGEUR_COLONNE) << setfill(' ') << 'D' << endl;
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'M'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'J'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'V'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'S'
+           << setw(LARGEUR_COLONNE) << setfill(' ') << 'D' << endl;
  
-      while (index < premierJourDuMois) {
+      while (index < premierJourDuMois) 
+      {
          cout << ((index == LUNDI) ? setw(LARGEUR_PREMIERE_COLONNE) :
-                 setw(LARGEUR_COLONNE)) << setfill(' ') << ' ';
+                  setw(LARGEUR_COLONNE)) << setfill(' ') << ' ';
          index++;
       }
  
@@ -103,13 +116,15 @@ void afficheCalendrier(int moisDebut, int mois2, int annee1, int annee2) {
                  setw(LARGEUR_COLONNE)) << setfill(' ') << compteur;
          index++;
  
-         if (index > DIMANCHE) {//début semaine          
+         if (index > DIMANCHE) 
+         {//début semaine          
             index = LUNDI;
             cout << endl;
          }
       }
       moisAffiche++;
-      if (moisAffiche > (int) Mois::DECEMBRE) {//début mois
+      if (moisAffiche > (int) Mois::DECEMBRE) 
+      {//début mois
          moisAffiche = (int) Mois::JANVIER;
          annee++;
       }
@@ -117,9 +132,17 @@ void afficheCalendrier(int moisDebut, int mois2, int annee1, int annee2) {
    }
 }
 
-string conversionNombreEnMois(int mois) {
+
+/*
+Converti l'entier correspondant au mois de l'année en texte clair  
+prenant en paramètre le mois définie sur un entier.
+Elle retourne le mois en français (texte clair).
+*/
+string conversionNombreEnMois(int mois) 
+{
    string moisConverti;
-   switch ((Mois) mois) {
+   switch ((Mois) mois) 
+   {
       case Mois::JANVIER: moisConverti = "Janvier";
          break;
       case Mois::FEVRIER: moisConverti = "Fevrier";
@@ -148,6 +171,7 @@ string conversionNombreEnMois(int mois) {
    return moisConverti;
 }
 
+
 void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie)
 {
    bool saisieOk = true;
@@ -163,11 +187,11 @@ void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie)
       }
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
    }
-   while(!saisieOk);
-   
+   while(!saisieOk);   
    cout << endl;
-     
 }
+
+
 void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin)
 {
    saisieDate(DATE_DEBUT, moisDebut, anneeDebut);
@@ -181,36 +205,60 @@ void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& annee
  
 }
 
-int premierJourSemaineDuMois(int mois, int annee) {
+
+int premierJourSemaineDuMois(int mois, int annee) 
+{
    int premierJour;
 
-   if (mois >= (int) Mois::MARS) {
+   if (mois >= (int) Mois::MARS) 
+   {
       premierJour = (int) (floor((23 * mois) / 9) + 1 + 4 + annee +
                     floor(annee / 4) - floor(annee / 100) + floor(annee / 400) 
                     - 2) % 7;
-   } else {
+   } 
+   else 
+   {
       premierJour = (int) (floor((23 * mois) / 9) + 1 + 4 + annee +
                     floor((annee - 1) / 4) - floor((annee - 1) / 100) 
                     + floor((annee - 1) / 400)) % 7;
    }
 
-   if (premierJour == 0) {
+   if (premierJour == 0) 
+   {
       premierJour = 7;
    }
    return premierJour;
 }
 
-bool estBissextile(int annee) {
+
+/*
+Détermine si l'année est bissextile ou non
+prenant en paramètre l'entier de l'année à tester.
+Elle retroune le booléen 1 si bissextile et 0 sinon.
+*/
+bool estBissextile(int annee) 
+{
    return (annee % 400 == 0) || ((annee % 4 == 0) && ((annee % 100) != 0));
 }
 
-int nbreDeJoursDansMois(int mois, int annee) {
+
+/*
+Calcule le nombre de jour dans un mois sachant son année
+prenant en paramètre le mois et l'année tout 2 des entiers.
+Elle retourne la valeur correspondant au nombre de jours dans le mois.
+*/
+int nbreDeJoursDansMois(int mois, int annee) 
+{
    int nbreDeJoursDansMois;
 
-   if (estBissextile(annee) && mois == (int) Mois::FEVRIER) {
+   if (estBissextile(annee) && mois == (int) Mois::FEVRIER) 
+   {
       nbreDeJoursDansMois = 29;
-   } else {
-      switch ((Mois) mois) {
+   } 
+   else 
+   {
+      switch ((Mois) mois) 
+      {
          case Mois::FEVRIER:
             nbreDeJoursDansMois = 28;
             break;
