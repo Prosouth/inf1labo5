@@ -54,7 +54,10 @@ const string DATE_DEBUT = "Entrez la date de debut   : ",
 /*
  Fonction qui détermine le jour de la semaine du premier jour du mois.
  Elle prend en paramètres le mois désiré ainsi que l'année.
- Elle retourne le jour de la semaine (1 = LUNDI => 7 = DIMANCHE)*/
+ Elle retourne le jour de la semaine (1 = LUNDI => 7 = DIMANCHE)
+ Remarque: La formule mathématique a été trouvée sur ce lien:
+ https://goo.gl/hRHD6V
+ */
 int premierJourSemaineDuMois(int mois, int annee);
 
 /*
