@@ -31,6 +31,7 @@
 #include <iostream> 
 #include <cmath>
 
+using namespace std;
 
 
 const int BORNE_ANNEE_MINIMALE = 1900,
@@ -43,11 +44,9 @@ const string DATE_DEBUT = "Entrez la date de debut: ",
 const char OUI = 'o',
            NON = 'n';
 
-using namespace std;
 
 void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie);
 void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin);
 char saisieContinuerProgramme(char& saisieUtilisateur);
 
 #endif /* SAISIES_H */
-

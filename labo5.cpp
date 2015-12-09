@@ -38,7 +38,6 @@ enum class Mois
    OCTOBRE, NOVEMBRE, DECEMBRE
 };
 
-
 int main() 
 {
    int moisDebut, moisFin, anneeDebut, anneeFin;
