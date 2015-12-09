@@ -5,6 +5,7 @@
  */
 #include "traitementEtAffichage.h"
 
+using namespace std;
 
 bool estBissextile(int annee) 
 {

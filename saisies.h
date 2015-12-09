@@ -25,6 +25,23 @@
 
 #ifndef SAISIES_H
 #define SAISIES_H
+#include <iomanip> 
+#include <cstdlib>
+#include <limits>
+#include <iostream> 
+#include <cmath>
+
+
+
+const int BORNE_ANNEE_MINIMALE = 1900,
+          BORNE_ANNEE_MAXIMALE = 2100;
+
+const string DATE_DEBUT = "Entrez la date de debut: ",
+             DATE_FIN = "Entrez la date de fin: ",
+             SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
+
+const char OUI = 'o',
+           NON = 'n';
 
 using namespace std;
 

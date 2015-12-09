@@ -5,6 +5,7 @@
  */
 #include "saisies.h"
 
+using namespace std;
 
 void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie)
 {

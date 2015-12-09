@@ -24,8 +24,6 @@
  */
 #include "saisies.h"
 #include "traitementEtAffichage.h"
-#include "saisies.cpp"
-#include "traitementEtAffichage.cpp"
 #include <iomanip> 
 #include <cstdlib>
 #include <limits>
@@ -39,20 +37,6 @@ enum class Mois
    JANVIER = 1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE,
    OCTOBRE, NOVEMBRE, DECEMBRE
 };
-
-const int LARGEUR_PREMIERE_COLONNE = 2,
-          LARGEUR_COLONNE = 3,
-          BORNE_ANNEE_MINIMALE = 1900,
-          BORNE_ANNEE_MAXIMALE = 2100,
-          DIMANCHE = 7,
-          LUNDI = 1;
-
-const string DATE_DEBUT = "Entrez la date de debut: ",
-             DATE_FIN = "Entrez la date de fin: ",
-             SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
-
-const char OUI = 'o',
-           NON = 'n';
 
 
 int main() 

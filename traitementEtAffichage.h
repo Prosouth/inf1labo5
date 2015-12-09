@@ -25,6 +25,21 @@
 
 #ifndef TRAITEMENTETAFFICHAGE_H
 #define TRAITEMENTETAFFICHAGE_H
+#include <iomanip> 
+#include <cstdlib>
+#include <limits>
+#include <iostream> 
+#include <cmath>
+
+const int LARGEUR_PREMIERE_COLONNE = 2,
+          LARGEUR_COLONNE = 3,
+          DIMANCHE = 7,
+          LUNDI = 1;
+
+const string DATE_DEBUT = "Entrez la date de debut: ",
+             DATE_FIN = "Entrez la date de fin: ",
+             SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
+
 
 using namespace std;
 
