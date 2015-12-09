@@ -17,10 +17,13 @@
                - Le programme tient compte des années bissextiles.
                - A la fin de la première exécution l'utilisateur a la possibilité
                  d'afficher un nouveau calendrier ou de quitter l'application.
+               - On suppose les paramètres en entrée aux fonctions corrects.
    
  Compilateur : g++ 5.2.0
  -----------------------------------------------------------------------------------
  */
+#include "saisies.h"
+#include "traitementEtAffichage.h"
 #include <iomanip> 
 #include <cstdlib>
 #include <limits>
@@ -34,15 +37,6 @@ enum class Mois
    JANVIER = 1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE,
    OCTOBRE, NOVEMBRE, DECEMBRE
 };
-
-int premierJourSemaineDuMois(int mois, int annee);
-string conversionNombreEnMois(int mois);
-bool estBissextile(int annee);
-char saisieContinuerProgramme(char& saisieUtilisateur);
-int nbreDeJoursDansMois(int mois, int annee);
-void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie);
-void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin);
-void afficheCalendrier(int moisDebut, int moisFin, int anneeDebut, int anneeFin);
 
 const int LARGEUR_PREMIERE_COLONNE = 2,
           LARGEUR_COLONNE = 3,
@@ -86,17 +80,12 @@ int main()
 }
 
 
-/*
-Fonction principale pour mettre en oeuvre l'affichage du calendrier
-prenant en paramètre le mois du début le mois de fin, l'année du début, l'année de fin
-tous des entiers. 
-*/
 void afficheCalendrier(int moisDebut, int mois2, int annee1, int annee2) 
 {
    int moisAffiche = moisDebut;
    int annee = annee1;
    
-   while ((moisAffiche <= mois2 && annee == annee2) || annee < annee2) 
+   while((moisAffiche <= mois2 && annee == annee2) || annee < annee2) 
    {
       int index = LUNDI;
       int premierJourDuMois = premierJourSemaineDuMois(moisAffiche, annee);
@@ -112,26 +101,26 @@ void afficheCalendrier(int moisDebut, int mois2, int annee1, int annee2)
            << setw(LARGEUR_COLONNE) << setfill(' ') << 'S'
            << setw(LARGEUR_COLONNE) << setfill(' ') << 'D' << endl;
  
-      while (index < premierJourDuMois) 
+      while(index < premierJourDuMois) 
       {
          cout << ((index == LUNDI) ? setw(LARGEUR_PREMIERE_COLONNE) :
                   setw(LARGEUR_COLONNE)) << setfill(' ') << ' ';
          index++;
       }
  
-      for (int compteur = 1; compteur <= nbreJoursDansMois; compteur++) {
+      for(int compteur = 1; compteur <= nbreJoursDansMois; compteur++) {
          cout << ((index == LUNDI) ? setw(LARGEUR_PREMIERE_COLONNE) :
                  setw(LARGEUR_COLONNE)) << setfill(' ') << compteur;
          index++;
  
-         if (index > DIMANCHE) 
+         if(index > DIMANCHE) 
          {//début semaine          
             index = LUNDI;
             cout << endl;
          }
       }
       moisAffiche++;
-      if (moisAffiche > (int) Mois::DECEMBRE) 
+      if(moisAffiche > (int) Mois::DECEMBRE) 
       {//début mois
          moisAffiche = (int) Mois::JANVIER;
          annee++;
@@ -141,15 +130,10 @@ void afficheCalendrier(int moisDebut, int mois2, int annee1, int annee2)
 }
 
 
-/*
-Converti l'entier correspondant au mois de l'année en texte clair  
-prenant en paramètre le mois définie sur un entier.
-Elle retourne le mois en français (texte clair).
-*/
 string conversionNombreEnMois(int mois) 
 {
    string moisConverti;
-   switch ((Mois) mois) 
+   switch((Mois)mois) 
    {
       case Mois::JANVIER: moisConverti = "Janvier";
          break;
@@ -165,7 +149,7 @@ string conversionNombreEnMois(int mois)
          break;
       case Mois::JUILLET: moisConverti = "Juillet";
          break;
-      case Mois::AOUT:moisConverti = "Aout";
+      case Mois::AOUT: moisConverti = "Aout";
          break;
       case Mois::SEPTEMBRE: moisConverti = "Septembre";
          break;
@@ -241,22 +225,13 @@ int premierJourSemaineDuMois(int mois, int annee)
 }
 
 
-/*
-Détermine si l'année est bissextile ou non
-prenant en paramètre l'entier de l'année à tester.
-Elle retroune le booléen 1 si bissextile et 0 sinon.
-*/
 bool estBissextile(int annee) 
 {
    return (annee % 400 == 0) || ((annee % 4 == 0) && ((annee % 100) != 0));
 }
 
 
-/*
-Calcule le nombre de jour dans un mois sachant son année
-prenant en paramètre le mois et l'année tout 2 des entiers.
-Elle retourne la valeur correspondant au nombre de jours dans le mois.
-*/
+
 int nbreDeJoursDansMois(int mois, int annee) 
 {
    int nbreDeJoursDansMois;

@@ -4,4 +4,6 @@
 
 # But not these files...
 !labo5.cpp
+!saisies.h
+!traitementEtAffichage.h
 !.gitignore
