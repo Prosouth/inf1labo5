@@ -31,13 +31,26 @@
 #include <iostream> 
 #include <cmath>
 
+using namespace std;
+
+enum class Mois 
+{
+   JANVIER = 1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE,
+   OCTOBRE, NOVEMBRE, DECEMBRE
+};
+
 const int LARGEUR_PREMIERE_COLONNE = 2,
           LARGEUR_COLONNE = 3,
           DIMANCHE = 7,
           LUNDI = 1;
+          
+const int BORNE_ANNEE_MINIMALE = 1900,
+          BORNE_ANNEE_MAXIMALE = 2100;
 
+const string DATE_DEBUT = "Entrez la date de debut: ",
+             DATE_FIN = "Entrez la date de fin: ",
+             SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
 
-using namespace std;
 
 int premierJourSemaineDuMois(int mois, int annee);
 
@@ -70,5 +83,9 @@ tous des entiers.
 void afficheCalendrier(int moisDebut, int moisFin, int anneeDebut, int anneeFin);
 
 void affichageBienvenue();
+
+void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie);
+
+void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin);
 
 #endif /* TRAITEMENTETAFFICHAGE_H */

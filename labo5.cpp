@@ -24,19 +24,8 @@
  */
 #include "saisies.h"
 #include "traitementEtAffichage.h"
-#include <iomanip> 
-#include <cstdlib>
-#include <limits>
-#include <iostream> 
-#include <cmath>
 
 using namespace std;
-
-enum class Mois 
-{
-   JANVIER = 1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE,
-   OCTOBRE, NOVEMBRE, DECEMBRE
-};
 
 int main() 
 {
@@ -47,9 +36,9 @@ int main()
    
    do
    {
-   saisieEtCheckDate(moisDebut, moisFin, anneeDebut, anneeFin);
-   afficheCalendrier(moisDebut, moisFin, anneeDebut, anneeFin);
-   saisieContinuerProgramme(saisieUtilisateur);
+      saisieEtCheckDate(moisDebut, moisFin, anneeDebut, anneeFin);
+      afficheCalendrier(moisDebut, moisFin, anneeDebut, anneeFin);
+      saisieContinuerProgramme(saisieUtilisateur);
    }
    while(saisieUtilisateur != OUI);
    

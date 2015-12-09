@@ -33,20 +33,9 @@
 
 using namespace std;
 
-
-const int BORNE_ANNEE_MINIMALE = 1900,
-          BORNE_ANNEE_MAXIMALE = 2100;
-
-const string DATE_DEBUT = "Entrez la date de debut: ",
-             DATE_FIN = "Entrez la date de fin: ",
-             SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
-
 const char OUI = 'o',
            NON = 'n';
 
-
-void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie);
-void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin);
 char saisieContinuerProgramme(char& saisieUtilisateur);
 
 #endif /* SAISIES_H */
