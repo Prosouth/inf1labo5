@@ -58,6 +58,7 @@ tous des entiers.
 */
 void afficheCalendrier(int moisDebut, int moisFin, int anneeDebut, int anneeFin);
 
+void affichageBienvenue();
 
 #endif /* TRAITEMENTETAFFICHAGE_H */
 
