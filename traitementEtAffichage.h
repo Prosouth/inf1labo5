@@ -51,7 +51,10 @@ const string DATE_DEBUT = "Entrez la date de debut   : ",
              DATE_FIN = "Entrez la date de fin     : ",
              SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
 
-
+/*
+ Fonction qui détermine le jour de la semaine du premier jour du mois.
+ Elle prend en paramètres le mois désiré ainsi que l'année.
+ Elle retourne le jour de la semaine (1 = LUNDI => 7 = DIMANCHE)*/
 int premierJourSemaineDuMois(int mois, int annee);
 
 /*
@@ -82,10 +85,26 @@ tous des entiers.
 */
 void afficheCalendrier(int moisDebut, int moisFin, int anneeDebut, int anneeFin);
 
+/*
+ * Fonction qui permet d'afficher un message de bienvenue à l'utilisateur.
+ */
 void affichageBienvenue();
 
+/*
+ Fonction qui permet de saisie une date sous la forme mm yyyy et qui vérifie 
+ que les bornes (supérieures et inférieures) soient respectées. 
+ Elle prend en paramètres le message d'invitation à la saisie, un mois ainsi
+ qu'une année.
+ */
 void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie);
 
+/*
+ Fonction qui fait appel à saisieDate en interne et qui permet de saisir deux
+ dates ainsi de vérifier que la deuxième date soit supérieure ou égale à la
+ première.
+ Elle prend en entrée le mois de début, le mois de fin, l'année de début ainsi
+ que l'année de fin.
+ */
 void saisieEtCheckDate(int& moisDebut, int& moisFin, int& anneeDebut, int& anneeFin);
 
 #endif /* TRAITEMENTETAFFICHAGE_H */

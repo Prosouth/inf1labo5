@@ -1,7 +1,7 @@
 /*
  -----------------------------------------------------------------------------------
  Laboratoire : Labo5
- Fichier     : saisies.h
+ Fichier     : saisieOuiOuNon.h
  Auteur(s)   : Saez Sebastien, Jérémie Zanone
  Date        : 09.12.2015
  But         : Ce programme affiche l'ensemble des mois du calendrier grégorien
@@ -23,8 +23,8 @@
  -----------------------------------------------------------------------------------
  */
 
-#ifndef SAISIES_H
-#define SAISIES_H
+#ifndef SAISIEOUIOUNON_H
+#define SAISIEOUIOUNON_H
 #include <iomanip> 
 #include <cstdlib>
 #include <limits>
@@ -35,7 +35,10 @@ using namespace std;
 
 const char OUI = 'o',
            NON = 'n';
-
+/*
+ Fonction qui permet à l'utilisateur de faire continuer le programme en fonction
+ de deux saisies différents('o' ou 'n').
+ */
 char saisieContinuerProgramme(char& saisieUtilisateur);
 
-#endif /* SAISIES_H */
+#endif /* SAISIEOUIOUNON_H */
