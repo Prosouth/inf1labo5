@@ -47,8 +47,8 @@ const int LARGEUR_PREMIERE_COLONNE = 2,
 const int BORNE_ANNEE_MINIMALE = 1900,
           BORNE_ANNEE_MAXIMALE = 2100;
 
-const string DATE_DEBUT = "Entrez la date de debut: ",
-             DATE_FIN = "Entrez la date de fin: ",
+const string DATE_DEBUT = "Entrez la date de debut   : ",
+             DATE_FIN = "Entrez la date de fin     : ",
              SAISIE_INCORRECTE = "Date non valide. Veuillez SVP recommencer.";
 
 

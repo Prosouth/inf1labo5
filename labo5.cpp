@@ -41,7 +41,7 @@ int main()
       saisieContinuerProgramme(saisieUtilisateur);
    }
    while(saisieUtilisateur != OUI);
-   
+
 
    return EXIT_SUCCESS;
 }
