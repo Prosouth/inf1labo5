@@ -4,8 +4,9 @@
 
 # But not these files...
 !labo5.cpp
-!saisies.h
-!saisies.cpp
+!saisieOuiOuNon.h
+!saisieOuiOuNon.cpp
 !traitementEtAffichage.h
 !traitementEtAffichage.cpp
 !.gitignore
+
