@@ -174,8 +174,8 @@ void saisieDate(const string& messageEntree, int& moisSaisi, int& anneeSaisie)
    {
       cout << messageEntree;
       if(!(saisieOk = static_cast<bool> (cin >> moisSaisi >> anneeSaisie)
-         && moisSaisi <= (int)Mois::DECEMBRE && moisSaisi >= (int)Mois::JANVIER 
-         && anneeSaisie >= BORNE_ANNEE_MINIMALE && moisSaisi <= BORNE_ANNEE_MAXIMALE))
+         && (moisSaisi <= (int)Mois::DECEMBRE && moisSaisi >= (int)Mois::JANVIER) 
+         && (anneeSaisie >= BORNE_ANNEE_MINIMALE && anneeSaisie <= BORNE_ANNEE_MAXIMALE)))
       {
          cin.clear();
          cout << SAISIE_INCORRECTE << endl << endl;
